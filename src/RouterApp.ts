@@ -24,19 +24,16 @@ const _defaultPrivateSpecCheck = (spec: Spec) => {
 }
 
 export class RouterApp {
-  private readonly params: RouterAppParams
-  public swaggerResource: SwaggerResource = {
+  public static defaultSwaggerResource: SwaggerResource = {
     cssMain: 'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.6.1/swagger-ui.min.css',
     jsBundle: 'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.6.1/swagger-ui-bundle.js',
     jsPreset: 'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.6.1/swagger-ui-standalone-preset.js',
   }
 
+  private readonly params: RouterAppParams
+
   constructor(params: RouterAppParams) {
     this.params = params
-  }
-
-  setSwaggerResource(resource: SwaggerResource) {
-    this.swaggerResource = resource
   }
 
   public addDocItem(...docItems: SwaggerDocItem[]) {
@@ -77,7 +74,7 @@ export class RouterApp {
   }
 
   private makeSwaggerRouter() {
-    const swaggerResource = this.params.swaggerResource || this.swaggerResource
+    const swaggerResource = this.params.swaggerResource || RouterApp.defaultSwaggerResource
     const myRouter = Router()
     this.params.docItems.forEach((item) => {
       myRouter.get(item.pageURL, async (ctx) => {
