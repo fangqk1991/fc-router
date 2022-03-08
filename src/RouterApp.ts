@@ -25,7 +25,11 @@ const _defaultPrivateSpecCheck = (spec: Spec) => {
 
 export class RouterApp {
   private readonly params: RouterAppParams
-  protected swaggerResource!: SwaggerResource
+  public swaggerResource: SwaggerResource = {
+    cssMain: 'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.6.1/swagger-ui.min.css',
+    jsBundle: 'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.6.1/swagger-ui-bundle.js',
+    jsPreset: 'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.6.1/swagger-ui-standalone-preset.js',
+  }
 
   constructor(params: RouterAppParams) {
     this.params = params
