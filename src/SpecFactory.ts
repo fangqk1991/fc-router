@@ -2,9 +2,12 @@ import { Handler, Spec } from 'koa-joi-router'
 import * as assert from 'assert'
 import { Api, buildSwaggerResponse, makeSwaggerRefSchema } from '@fangcha/swagger'
 
+type RouteTransform = (route: string) => string
+
 interface Options {
   skipAuth?: boolean
   permission?: string
+  routeTransform?: RouteTransform
 }
 
 export class SpecFactory {
@@ -41,6 +44,9 @@ export class SpecFactory {
     if (this.defaultOptions.permission) {
       builder.setPermission(this.defaultOptions.permission)
     }
+    if (this.defaultOptions.routeTransform) {
+      builder.setRouteTransform(this.defaultOptions.routeTransform)
+    }
     this.builders.push(builder)
     return builder
   }
@@ -55,6 +61,7 @@ class SpecBuilder {
   private readonly _api!: Api
   private _handler!: Handler
   private _description = ''
+  private _routeTransform?: RouteTransform
   public extras: any = {}
 
   public constructor(factory: SpecFactory, api: Api) {
@@ -74,6 +81,11 @@ class SpecBuilder {
 
   public skipAuth() {
     this.extras.skipAuth = true
+    return this
+  }
+
+  public setRouteTransform(transform: RouteTransform) {
+    this._routeTransform = transform
     return this
   }
 
@@ -113,7 +125,7 @@ class SpecBuilder {
     const spec: Spec = {
       // TODO: 暂时使用 toLowerCase 兼容现有 koa 设定
       method: this._api.method.toLowerCase(),
-      path: this._api.route,
+      path: this._routeTransform ? this._routeTransform(this._api.route) : this._api.route,
       swaggerMeta: {
         summary: this._api.description,
         description: detailInfo.replace(/\n/g, '\n\n'),
