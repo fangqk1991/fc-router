@@ -3,7 +3,7 @@ import * as Koa from 'koa'
 import { Context } from 'koa'
 import { RouterSdkOptions } from './RouterSdkOptions'
 import { WriteLogMiddlewareBuilder } from '@fangcha/logger/lib/koa'
-import { FangchaAdminSession } from '@fangcha/backend-kit'
+import { _FangchaState, FangchaAdminSession, FangchaSession } from '@fangcha/backend-kit'
 import AppError from '@fangcha/app-error'
 
 const compose = require('koa-compose')
@@ -13,9 +13,26 @@ export const RouterSdkPlugin = (options: RouterSdkOptions): AppPluginProtocol =>
   return {
     appDidLoad: (app) => {
       const koaApp = new Koa()
-      if (options.onRequestError) {
-        koaApp.on('error', options.onRequestError)
-      }
+
+      const onRequestError =
+        options.onRequestError ||
+        ((err, ctx: Koa.Context) => {
+          if (ctx.status >= 500) {
+            const session = ctx.session as FangchaSession
+            _FangchaState.botProxy.notifyApiError({
+              api: ctx.path || '',
+              errorMsg: err.message,
+              method: (ctx.method || '').toUpperCase(),
+              statusCode: ctx.status,
+              user: session.curUserStr(),
+              ipAddress: session.realIP,
+              duration: ctx.duration,
+              reqid: session.reqid || '-',
+              referer: ctx.headers.referer || '-',
+            })
+          }
+        })
+      koaApp.on('error', onRequestError)
 
       const routerApp = options.routerApp
 

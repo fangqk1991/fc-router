@@ -197,10 +197,10 @@
   resolved "https://registry.yarnpkg.com/@fangcha/app-error/-/app-error-1.4.0.tgz#2fdcb6e146652ea6a6a6db55bdd8599f19f21b58"
   integrity sha512-sF3IRxL4pXVXBhRyqd5oTFqjwW3d2ag4Fo2K3HhTdJ3moM4gGT9dpIf412bgjXXBoQLMOPCtdkISnBg9xA7Vnw==
 
-"@fangcha/backend-kit@^0.12.2":
-  version "0.12.2"
-  resolved "https://registry.yarnpkg.com/@fangcha/backend-kit/-/backend-kit-0.12.2.tgz#73488b8d1521fe717efc79a5c5a78473c609c1db"
-  integrity sha512-GfKAr0tyD6SknErTi9LvISWaVyCK/KmHjeQ8/s8eavadSmK80l1Z6KrUD5pEzTLPt50YAIe5mI7fwXsENveQPA==
+"@fangcha/backend-kit@^0.14.2":
+  version "0.14.2"
+  resolved "https://registry.yarnpkg.com/@fangcha/backend-kit/-/backend-kit-0.14.2.tgz#c064e8a4488ebc59b6069be00b1c80060041a6c5"
+  integrity sha512-aA9UWJDFcPmtOFsLDxPIxwWEegYwqTESg32f9fzH29UO3max2DCBAm9u9Yhn255BS1CYWMaxMFrEzKR+RL8wYg==
 
 "@fangcha/eslint@^0.2.0":
   version "0.2.0"
