@@ -5,6 +5,7 @@ import { RouterSdkOptions } from './RouterSdkOptions'
 import { WriteLogMiddlewareBuilder } from '@fangcha/logger/lib/koa'
 import { _FangchaState, FangchaAdminSession, FangchaSession } from '@fangcha/backend-kit'
 import AppError from '@fangcha/app-error'
+import { logger } from '@fangcha/logger'
 
 const compose = require('koa-compose')
 const bodyParser = require('koa-body')
@@ -84,10 +85,15 @@ export const RouterSdkPlugin = (options: RouterSdkOptions): AppPluginProtocol =>
         ])
       )
 
+      const onKoaAppLaunched =
+        options.onKoaAppLaunched ||
+        (() => {
+          _FangchaState.botProxy.notify(`[${_FangchaState.tags.join(', ')}] App launched.`)
+          logger.info(`[${_FangchaState.env}] Backend service listening on port ${options.backendPort}!`)
+        })
+
       const server = koaApp.listen(options.backendPort, () => {
-        if (options.onKoaAppLaunched) {
-          options.onKoaAppLaunched()
-        }
+        onKoaAppLaunched()
       })
       if (options.serverTimeout) {
         server.setTimeout(options.serverTimeout)
