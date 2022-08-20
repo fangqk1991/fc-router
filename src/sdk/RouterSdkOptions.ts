@@ -1,7 +1,7 @@
 import * as Koa from 'koa'
 import { WriteLogMiddlewareBuilder } from '@fangcha/logger/lib/koa'
-import { FangchaSession } from '@fangcha/backend-kit'
 import { RouterApp } from '../main'
+import { FangchaSession } from '../session'
 
 export interface RouterSdkOptions {
   backendPort: number

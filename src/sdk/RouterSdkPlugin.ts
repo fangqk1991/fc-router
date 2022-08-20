@@ -3,9 +3,10 @@ import * as Koa from 'koa'
 import { Context } from 'koa'
 import { RouterSdkOptions } from './RouterSdkOptions'
 import { WriteLogMiddlewareBuilder } from '@fangcha/logger/lib/koa'
-import { _FangchaState, FangchaAdminSession, FangchaSession } from '@fangcha/backend-kit'
+import { _FangchaState } from '@fangcha/backend-kit'
 import AppError from '@fangcha/app-error'
 import { logger } from '@fangcha/logger'
+import { FangchaAdminSession, FangchaSession } from '../session'
 
 const compose = require('koa-compose')
 const bodyParser = require('koa-body')
@@ -74,13 +75,11 @@ export const RouterSdkPlugin = (options: RouterSdkOptions): AppPluginProtocol =>
           // 暴露公开 api
           routerApp.makePublicRouterMiddleware(),
 
-          // 访问鉴权
           async (ctx: Context, next: Function) => {
             await options.handleAuth(ctx)
             await next()
           },
 
-          // 添加需要 auth 的 api
           routerApp.makePrivateRouterMiddleware(),
         ])
       )
