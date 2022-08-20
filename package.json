@@ -1,6 +1,6 @@
 {
   "name": "@fangcha/router",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "scripts": {
@@ -16,7 +16,7 @@
   "devDependencies": {
     "@fangcha/app-error": "^1.4.0",
     "@fangcha/assert": "^1.1.0",
-    "@fangcha/backend-kit": "^0.16.1",
+    "@fangcha/backend-kit": "^0.17.2",
     "@fangcha/eslint": "^0.2.0",
     "@fangcha/logger": "^0.3.0",
     "@fangcha/swagger": "^0.1.0",

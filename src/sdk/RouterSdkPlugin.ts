@@ -6,7 +6,7 @@ import { WriteLogMiddlewareBuilder } from '@fangcha/logger/lib/koa'
 import { _FangchaState } from '@fangcha/backend-kit'
 import AppError from '@fangcha/app-error'
 import { logger } from '@fangcha/logger'
-import { FangchaAdminSession, FangchaSession } from '../session'
+import { _SessionApp, FangchaAdminSession, FangchaSession } from '../session'
 
 const compose = require('koa-compose')
 const bodyParser = require('koa-body')
@@ -14,6 +14,15 @@ const bodyParser = require('koa-body')
 export const RouterSdkPlugin = (options: RouterSdkOptions): AppPluginProtocol => {
   return {
     appDidLoad: (app) => {
+      _SessionApp.baseURL = options.baseURL
+
+      if (options.jwtProtocol) {
+        _SessionApp.setJWTProtocol(options.jwtProtocol)
+      }
+      if (options.basicAuthProtocol) {
+        _SessionApp.basicAuthProtocol = options.basicAuthProtocol
+      }
+
       const koaApp = new Koa()
 
       const onRequestError =
