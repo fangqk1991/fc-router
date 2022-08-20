@@ -12,17 +12,17 @@ const compose = require('koa-compose')
 const bodyParser = require('koa-body')
 
 export const RouterSdkPlugin = (options: RouterSdkOptions): AppPluginProtocol => {
+  _SessionApp.baseURL = options.baseURL
+
+  if (options.jwtProtocol) {
+    _SessionApp.setJWTProtocol(options.jwtProtocol)
+  }
+  if (options.basicAuthProtocol) {
+    _SessionApp.basicAuthProtocol = options.basicAuthProtocol
+  }
+
   return {
     appDidLoad: (app) => {
-      _SessionApp.baseURL = options.baseURL
-
-      if (options.jwtProtocol) {
-        _SessionApp.setJWTProtocol(options.jwtProtocol)
-      }
-      if (options.basicAuthProtocol) {
-        _SessionApp.basicAuthProtocol = options.basicAuthProtocol
-      }
-
       const koaApp = new Koa()
 
       const onRequestError =
