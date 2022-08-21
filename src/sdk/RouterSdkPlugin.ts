@@ -96,7 +96,7 @@ export const RouterSdkPlugin = (options: RouterSdkOptions): AppPluginProtocol =>
       const onKoaAppLaunched =
         options.onKoaAppLaunched ||
         (() => {
-          _FangchaState.botProxy.notify(`[${_FangchaState.tags.join(', ')}] App launched.`)
+          // _FangchaState.botProxy.notify(`[${_FangchaState.tags.join(', ')}] App launched.`)
           logger.info(`[${_FangchaState.env}] Backend service listening on port ${options.backendPort}!`)
         })
 
