@@ -12,8 +12,6 @@ export class FangchaOpenSession<T = OpenVisitor> extends FangchaSession {
 
   public constructor(ctx: Context) {
     super(ctx)
-    assert.ok(!!_SessionApp.basicAuthProtocol, 'basicAuthProtocol missing', 500)
-
     {
       const authorization = base64ToUtf8((this.headers['authorization'] || '').replace(/^Basic /, ''))
       const matches = authorization.match(/^([^:]+):(.*)$/) as any[]
@@ -33,6 +31,7 @@ export class FangchaOpenSession<T = OpenVisitor> extends FangchaSession {
 
   public auth() {
     assert.ok(!!this.visitorId && !!this.secret, 'Authorization missing.', 401)
+    assert.ok(!!_SessionApp.basicAuthProtocol, 'basicAuthProtocol missing', 500)
     this.visitor = _SessionApp.basicAuthProtocol.findVisitor(this.visitorId, this.secret) as any
     assert.ok(!!this.visitor, `visitor[${this.visitorId}] not found.`, 401)
     // if (this.visitor.secureMode) {
