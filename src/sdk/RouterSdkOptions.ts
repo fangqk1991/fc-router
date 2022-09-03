@@ -9,13 +9,25 @@ export interface RouterSdkOptions {
 
   backendPort: number
   routerApp: RouterApp
-  handleAuth: (ctx: Koa.Context) => Promise<void>
+  /**
+   * @default FangchaSession
+   */
+  Session?: typeof FangchaSession
+  /**
+   * @default execute ctx.session.auth()
+   */
+  handleAuth?: (ctx: Koa.Context) => Promise<void>
   onRequestError?: (err: Error, ctx: Koa.Context) => void
   customWriteLogMiddlewareBuilder?: WriteLogMiddlewareBuilder
-  Session?: typeof FangchaSession
   onKoaAppLaunched?: () => void
   serverTimeout?: number
 
+  /**
+   * @description If using jwtProtocol, Session default will be FangchaAdminSession
+   */
   jwtProtocol?: JWTProtocol
+  /**
+   * @description If using basicAuthProtocol, Session default will be FangchaOpenSession
+   */
   basicAuthProtocol?: BasicAuthProtocol
 }

@@ -6,13 +6,20 @@ import { WriteLogMiddlewareBuilder } from '@fangcha/logger/lib/koa'
 import { _FangchaState } from '@fangcha/backend-kit'
 import AppError from '@fangcha/app-error'
 import { logger } from '@fangcha/logger'
-import { _SessionApp, FangchaAdminSession, FangchaSession } from '../session'
+import { _SessionApp, FangchaAdminSession, FangchaOpenSession, FangchaSession } from '../session'
+import assert from '@fangcha/assert'
 
 const compose = require('koa-compose')
 const bodyParser = require('koa-body')
 
 export const RouterSdkPlugin = (options: RouterSdkOptions): AppPluginProtocol => {
   _SessionApp.baseURL = options.baseURL
+
+  assert.ok(
+    !(options.jwtProtocol && options.basicAuthProtocol),
+    'jwtProtocol and basicAuthProtocol can only pass one',
+    500
+  )
 
   if (options.jwtProtocol) {
     _SessionApp.setJWTProtocol(options.jwtProtocol)
@@ -56,7 +63,13 @@ export const RouterSdkPlugin = (options: RouterSdkOptions): AppPluginProtocol =>
       const codeVersion = process.env.CODE_VERSION || 'Unknown'
       const writeLogMiddlewareBuilder = options.customWriteLogMiddlewareBuilder || new WriteLogMiddlewareBuilder()
 
-      const sessionClazz = options.Session || FangchaAdminSession
+      if (options.jwtProtocol && !options.Session) {
+        options.Session = FangchaAdminSession
+      }
+      if (options.basicAuthProtocol && !options.Session) {
+        options.Session = FangchaOpenSession
+      }
+      const sessionClazz = options.Session || FangchaSession
       koaApp.use(
         compose([
           async (ctx: Context, next: Function) => {
@@ -85,7 +98,13 @@ export const RouterSdkPlugin = (options: RouterSdkOptions): AppPluginProtocol =>
           routerApp.makePublicRouterMiddleware(),
 
           async (ctx: Context, next: Function) => {
-            await options.handleAuth(ctx)
+            const handleAuth =
+              options.handleAuth ||
+              (async (ctx) => {
+                const session = ctx.session as FangchaSession
+                await session.auth()
+              })
+            await handleAuth(ctx)
             await next()
           },
 
