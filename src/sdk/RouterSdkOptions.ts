@@ -12,7 +12,7 @@ export interface RouterSdkOptions {
   handleAuth: (ctx: Koa.Context) => Promise<void>
   onRequestError?: (err: Error, ctx: Koa.Context) => void
   customWriteLogMiddlewareBuilder?: WriteLogMiddlewareBuilder
-  Session?: typeof FangchaSession & any
+  Session?: typeof FangchaSession
   onKoaAppLaunched?: () => void
   serverTimeout?: number
 
