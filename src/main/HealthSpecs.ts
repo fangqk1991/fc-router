@@ -1,26 +1,26 @@
-import { HealthApis } from '@fangcha/swagger'
 import { SpecFactory } from './SpecFactory'
+import { RetainedHealthApis } from '../apis'
 
 const factory = new SpecFactory('接口基本测试')
 
-factory.prepare(HealthApis.Ping, async (ctx) => {
+factory.prepare(RetainedHealthApis.Ping, async (ctx) => {
   ctx.body = 'PONG'
 })
 
-factory.prepare(HealthApis.PingAuth, async (ctx) => {
+factory.prepare(RetainedHealthApis.PingAuth, async (ctx) => {
   ctx.body = 'PONG'
 })
 
-factory.prepare(HealthApis.PingPrint, async (ctx) => {
+factory.prepare(RetainedHealthApis.PingPrint, async (ctx) => {
   console.info('query: ', JSON.stringify(ctx.request.query, null, 2))
   ctx.body = 'PONG'
 })
 
-factory.prepare(HealthApis.PingQuery, async (ctx) => {
+factory.prepare(RetainedHealthApis.PingQuery, async (ctx) => {
   ctx.body = ctx.request.query
 })
 
-factory.prepare(HealthApis.PingFullData, async (ctx) => {
+factory.prepare(RetainedHealthApis.PingFullData, async (ctx) => {
   ctx.body = {
     headers: ctx.request.headers,
     query: ctx.request.query,
@@ -28,7 +28,7 @@ factory.prepare(HealthApis.PingFullData, async (ctx) => {
   }
 })
 
-factory.prepare(HealthApis.PingError, async (_ctx) => {
+factory.prepare(RetainedHealthApis.PingError, async (_ctx) => {
   throw new Error('Ping Error Test')
 })
 
