@@ -19,7 +19,7 @@
     "@fangcha/backend-kit": "^0.17.2",
     "@fangcha/eslint": "^0.2.0",
     "@fangcha/logger": "^0.3.0",
-    "@fangcha/swagger": "^0.1.0",
+    "@fangcha/swagger": "^0.1.1",
     "@fangcha/tools": "^1.21.0",
     "@types/assert": "^1.5.4",
     "@types/jsonwebtoken": "^8.5.8",
