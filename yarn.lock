@@ -204,10 +204,10 @@
   dependencies:
     "@fangcha/app-error" "^1.1.0"
 
-"@fangcha/backend-kit@^0.17.2":
-  version "0.17.2"
-  resolved "https://registry.yarnpkg.com/@fangcha/backend-kit/-/backend-kit-0.17.2.tgz#02714e860599031af460a05becdd05c1f2c85250"
-  integrity sha512-6uShPWwdqDzZNC4YNcaPCA4uGbquhLb1IDkZ4SXv7HAl0w9wMxl55iju+bgHDEdOK7LKn6Ab6QVIH3iETxwhHQ==
+"@fangcha/backend-kit@^0.30.0":
+  version "0.30.0"
+  resolved "https://registry.yarnpkg.com/@fangcha/backend-kit/-/backend-kit-0.30.0.tgz#c7161380bef2017e3450636396c434cf9d0823dc"
+  integrity sha512-QGqQN0YJT8jz+MtI3ygxuwrxT1XYOZooBnTNMylCF9Os1/FtN0JzqtKde2sFgulbKXNkKs9t80ApGTbSw95GTg==
 
 "@fangcha/eslint@^0.2.0":
   version "0.2.0"

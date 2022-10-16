@@ -7,6 +7,12 @@ export const RetainedHealthApis = {
     description: '测试连通性',
     skipAuth: true,
   } as Api,
+  PingHealth: {
+    method: 'GET',
+    route: `/api/health/ping-health`,
+    description: '检查测试(自定义)',
+    skipAuth: true,
+  } as Api,
   PingPrint: {
     method: 'GET',
     route: `/api/health/ping-print`,

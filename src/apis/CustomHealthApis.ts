@@ -1,12 +1,6 @@
 import { Api } from '@fangcha/swagger'
 
 export const CustomHealthApis = {
-  PingHealth: {
-    method: 'GET',
-    route: `/api/health/ping-health`,
-    description: '检查测试(自定义)',
-    skipAuth: true,
-  } as Api,
   AppPermissionInfoGet: {
     method: 'GET',
     route: `/api/health/app-permission-info`,

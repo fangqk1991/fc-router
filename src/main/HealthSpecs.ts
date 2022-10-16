@@ -7,6 +7,13 @@ factory.prepare(RetainedHealthApis.Ping, async (ctx) => {
   ctx.body = 'PONG'
 })
 
+factory.prepare(RetainedHealthApis.PingHealth, async (ctx) => {
+  import('@fangcha/backend-kit').then(async ({ _FangchaState }) => {
+    await _FangchaState.checkHealth()
+    ctx.body = _FangchaState.retainHealthWord || 'PONG'
+  })
+})
+
 factory.prepare(RetainedHealthApis.PingAuth, async (ctx) => {
   ctx.body = 'PONG'
 })
