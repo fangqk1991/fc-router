@@ -49,4 +49,9 @@ export const RetainedHealthApis = {
     description: '测试错误触发',
     skipAuth: true,
   } as Api,
+  SystemInfoGet: {
+    method: 'GET',
+    route: `/api/health/system-info`,
+    description: '系统信息获取',
+  } as Api,
 }

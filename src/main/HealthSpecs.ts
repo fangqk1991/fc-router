@@ -39,4 +39,10 @@ factory.prepare(RetainedHealthApis.PingError, async (_ctx) => {
   throw new Error('Ping Error Test')
 })
 
+factory.prepare(RetainedHealthApis.SystemInfoGet, async (ctx) => {
+  await import('@fangcha/backend-kit').then(async ({ _FangchaState }) => {
+    ctx.body = _FangchaState.appInfo()
+  })
+})
+
 export const HealthSpecs = factory.buildSpecs()
