@@ -65,10 +65,6 @@ export class SwaggerBuilder {
     return data
   }
 
-  public buildContent() {
-    return JSON.stringify(this.buildJSON(), null, 2)
-  }
-
   public setTitle(content: string) {
     this.summaryInfo.title = content
     return this

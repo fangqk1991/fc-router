@@ -160,7 +160,7 @@ export class RouterApp {
         if (item.models) {
           swagger.addModel(...item.models)
         }
-        ctx.body = swagger.buildContent()
+        ctx.body = swagger.buildJSON()
       })
     })
     return myRouter
