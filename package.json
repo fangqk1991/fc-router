@@ -4,6 +4,7 @@
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "scripts": {
+    "start": "ts-node-dev --no-notify --ignore-watch node_modules app/app.ts",
     "test": "nyc mocha --require ts-node/register tests/**/*.test.ts --timeout 1000000 --exit",
     "build": "rm -rf ./lib/ && tsc"
   },
@@ -15,6 +16,7 @@
   "license": "MIT",
   "devDependencies": {
     "@fangcha/app-error": "^1.4.0",
+    "@fangcha/app-request": "^1.5.0",
     "@fangcha/assert": "^1.1.0",
     "@fangcha/backend-kit": "^0.30.0",
     "@fangcha/eslint": "^0.2.0",
