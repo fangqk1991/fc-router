@@ -30,7 +30,9 @@ export const RouterSdkPlugin = (options: RouterSdkOptions): AppPluginProtocol =>
 
   return {
     appDidLoad: (app) => {
-      const koaApp = new Koa()
+      const koaApp = new Koa({
+        proxy: options.useProxy || false,
+      })
 
       const onRequestError =
         options.onRequestError ||
