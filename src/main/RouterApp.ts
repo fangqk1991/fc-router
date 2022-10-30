@@ -6,7 +6,7 @@ import { SwaggerBuilder } from './SwaggerBuilder'
 import { HealthSpecs } from './HealthSpecs'
 
 export interface RouterAppParams {
-  baseURL: string
+  baseURL?: string
   version?: string
   description?: string
   useBasicAuth?: boolean
@@ -147,11 +147,12 @@ export class RouterApp {
 `
       })
       myRouter.get(`${item.pageURL}/swagger.json`, async (ctx) => {
+        const baseURL = this.params.baseURL || ''
         const swagger = new SwaggerBuilder({
           title: item.name,
           description: item.description || this.params.description || '',
           version: item.version || this.params.version || '1.0.0',
-          baseURL: this.params.baseURL,
+          baseURL: baseURL,
         })
         if (this.params.useBasicAuth) {
           swagger.useBasicAuth()

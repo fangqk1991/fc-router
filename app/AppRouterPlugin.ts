@@ -7,7 +7,6 @@ const config = {
 }
 
 const routerApp = new RouterApp({
-  baseURL: config.baseURL,
   useHealthSpecs: true,
   docItems: [],
 })
