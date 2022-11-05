@@ -57,9 +57,17 @@ export class RouterApp {
     this._preHandleMiddlewares.push(middleware)
     return this
   }
-
   public getPreHandleMiddlewares() {
     return this._preHandleMiddlewares
+  }
+
+  private _middlewaresBeforeInit: Koa.Middleware[] = []
+  public addMiddlewareBeforeInit(middleware: Koa.Middleware) {
+    this._middlewaresBeforeInit.push(middleware)
+    return this
+  }
+  public getMiddlewaresBeforeInit() {
+    return this._middlewaresBeforeInit
   }
 
   public makePrivateRouterMiddleware() {

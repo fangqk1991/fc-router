@@ -72,6 +72,8 @@ export const RouterSdkPlugin = (options: RouterSdkOptions): AppPluginProtocol =>
       const sessionClazz = options.Session || FangchaSession
       koaApp.use(
         compose([
+          ...routerApp.getMiddlewaresBeforeInit(),
+
           async (ctx: Context, next: Function) => {
             ctx.set('x-code-version', codeVersion)
             ctx.session = new sessionClazz(ctx)
