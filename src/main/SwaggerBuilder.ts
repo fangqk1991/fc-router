@@ -1,5 +1,5 @@
 import { SwaggerMeta, SwaggerModelDefinitionV2, SwaggerParameter } from '@fangcha/swagger'
-import { Spec } from 'koa-joi-router'
+import { Spec } from './FCRouterModels'
 
 enum AuthType {
   None = 'None',

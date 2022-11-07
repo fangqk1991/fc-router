@@ -1,5 +1,5 @@
 import { SwaggerModelDefinitionV2 } from '@fangcha/swagger'
-import { Spec } from 'koa-joi-router'
+import { Spec } from './FCRouterModels'
 
 export type PrivateSpecCheck = (spec?: Spec) => boolean
 

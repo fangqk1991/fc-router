@@ -1,9 +1,9 @@
-import * as Router from 'koa-joi-router'
-import { Spec } from 'koa-joi-router'
 import * as Koa from 'koa'
 import { SwaggerDocItem } from './SwaggerDocItem'
 import { SwaggerBuilder } from './SwaggerBuilder'
 import { HealthSpecs } from './HealthSpecs'
+import { FCRouter } from './FCRouter'
+import { Spec } from './FCRouterModels'
 
 export interface RouterAppParams {
   baseURL?: string
@@ -75,8 +75,8 @@ export class RouterApp {
       const privateSpecCheck = cur.privateSpecCheck || _defaultPrivateSpecCheck
       return prev.concat(cur.specs.filter((spec) => privateSpecCheck(spec)))
     }, [])
-    const router = Router()
-    router.route(privateSpecs)
+    const router = new FCRouter()
+    router.addRoutes(privateSpecs)
     return router.middleware()
   }
 
@@ -86,15 +86,15 @@ export class RouterApp {
       return prev.concat(cur.specs.filter((spec) => !privateSpecCheck(spec)))
     }, [])
     const router = this.makeSwaggerRouter()
-    router.route(publicSpecs)
+    router.addRoutes(publicSpecs)
     return router.middleware()
   }
 
   private makeSwaggerRouter() {
     const swaggerResource = this.params.swaggerResource || RouterApp.defaultSwaggerResource
-    const myRouter = Router()
+    const myRouter = new FCRouter()
     this.params.docItems.forEach((item) => {
-      myRouter.get(item.pageURL, async (ctx) => {
+      myRouter.router.get(item.pageURL, async (ctx) => {
         ctx.body = `
 <!DOCTYPE html>
 <html lang="en">
@@ -154,7 +154,7 @@ export class RouterApp {
 </html>
 `
       })
-      myRouter.get(`${item.pageURL}/swagger.json`, async (ctx) => {
+      myRouter.router.get(`${item.pageURL}/swagger.json`, async (ctx) => {
         const baseURL = this.params.baseURL || ''
         const swagger = new SwaggerBuilder({
           title: item.name,

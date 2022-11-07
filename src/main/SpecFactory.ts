@@ -1,6 +1,6 @@
-import { Handler, Spec } from 'koa-joi-router'
 import * as assert from 'assert'
 import { Api, buildSwaggerResponse, makeSwaggerRefSchema } from '@fangcha/swagger'
+import { Handler, Spec } from './FCRouterModels'
 
 type RouteTransform = (route: string) => string
 
