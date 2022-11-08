@@ -55,9 +55,15 @@ export const RouterSdkPlugin = (options: RouterSdkOptions): AppPluginProtocol =>
       const routerApp = options.routerApp
 
       for (const plugin of app.plugins) {
-        if (plugin.specDocItem) {
-          options.routerApp.addDocItem(plugin.specDocItem)
+        // TODO: temporary compatibility
+        if (plugin['specDocItem']) {
+          options.routerApp.addDocItem(plugin['specDocItem'])
         }
+
+        const specDocItems = plugin.specDocItems || []
+        specDocItems.forEach((item) => {
+          options.routerApp.addDocItem(item)
+        })
       }
 
       const codeVersion = process.env.CODE_VERSION || 'Unknown'
