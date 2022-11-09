@@ -2,8 +2,9 @@ import { SpecFactory } from './SpecFactory'
 import { RetainedSessionApis } from '../apis'
 import { FangchaJwtSession } from '../session'
 import { SessionInfo } from '../models'
+import { SwaggerDocItem } from './SwaggerDocItem'
 
-const factory = new SpecFactory('接口基本测试')
+const factory = new SpecFactory('Session')
 
 factory.prepare(RetainedSessionApis.SessionInfoGet, async (ctx) => {
   const session = ctx.session as FangchaJwtSession
@@ -17,3 +18,9 @@ factory.prepare(RetainedSessionApis.SessionInfoGet, async (ctx) => {
 })
 
 export const JwtSessionSpecs = factory.buildSpecs()
+
+export const JwtSessionSpecDocItem: SwaggerDocItem = {
+  name: 'Session',
+  pageURL: '/api-docs/v1/session-sdk',
+  specs: JwtSessionSpecs,
+}
