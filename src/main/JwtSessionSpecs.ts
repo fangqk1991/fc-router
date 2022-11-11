@@ -17,6 +17,11 @@ factory.prepare(RetainedSessionApis.SessionInfoGet, async (ctx) => {
   ctx.body = data
 })
 
+factory.prepare(RetainedSessionApis.UserInfoGet, async (ctx) => {
+  const session = ctx.session as FangchaJwtSession
+  ctx.body = session.getAuthInfo()
+})
+
 export const JwtSessionSpecs = factory.buildSpecs()
 
 export const JwtSessionSpecDocItem: SwaggerDocItem = {
