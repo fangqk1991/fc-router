@@ -1,5 +1,6 @@
 export * from './SwaggerBuilder'
 export * from './HealthSpecs'
+export * from './JwtSessionSpecs'
 export * from './SpecFactory'
 export * from './SwaggerDocItem'
 export * from './RouterApp'
