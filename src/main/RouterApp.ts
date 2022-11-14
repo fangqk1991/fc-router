@@ -45,6 +45,17 @@ export class RouterApp {
     }
   }
 
+  public updateParams(params: Partial<RouterAppParams>) {
+    if (!this.params.useHealthSpecs && params.useHealthSpecs) {
+      this.params.docItems.push({
+        name: '健康检查',
+        pageURL: '/api-docs/v1/health',
+        specs: HealthSpecs,
+      })
+    }
+    Object.assign(this.params, params)
+  }
+
   public addDocItem(...docItems: SwaggerDocItem[]) {
     for (const docItem of docItems) {
       this.params.docItems.push(docItem)
