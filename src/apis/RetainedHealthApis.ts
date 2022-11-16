@@ -54,4 +54,10 @@ export const RetainedHealthApis = {
     route: `/api/health/system-info`,
     description: '系统信息获取',
   } as Api,
+  FrontendConfigGet: {
+    method: 'GET',
+    route: `/api/health/frontend-config`,
+    description: '获取前端配置',
+    skipAuth: true,
+  } as Api,
 }
