@@ -1,7 +1,6 @@
 import * as Koa from 'koa'
 import { SwaggerDocItem } from './SwaggerDocItem'
 import { SwaggerBuilder } from './SwaggerBuilder'
-import { HealthSpecs } from './HealthSpecs'
 import { FCRouter } from './FCRouter'
 import { Spec } from './FCRouterModels'
 
@@ -12,7 +11,6 @@ export interface RouterAppParams {
   useBasicAuth?: boolean
   docItems: SwaggerDocItem[]
   swaggerResource?: SwaggerResource
-  useHealthSpecs?: boolean
 }
 
 export interface SwaggerResource {
@@ -36,23 +34,9 @@ export class RouterApp {
 
   constructor(params: RouterAppParams) {
     this.params = params
-    if (params.useHealthSpecs) {
-      this.params.docItems.push({
-        name: '健康检查',
-        pageURL: '/api-docs/v1/health',
-        specs: HealthSpecs,
-      })
-    }
   }
 
   public updateParams(params: Partial<RouterAppParams>) {
-    if (!this.params.useHealthSpecs && params.useHealthSpecs) {
-      this.params.docItems.push({
-        name: '健康检查',
-        pageURL: '/api-docs/v1/health',
-        specs: HealthSpecs,
-      })
-    }
     Object.assign(this.params, params)
   }
 
