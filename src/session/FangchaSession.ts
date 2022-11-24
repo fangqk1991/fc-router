@@ -6,6 +6,7 @@ import { _SessionApp } from './_SessionApp'
 
 export class FangchaSession {
   public readonly sessionId!: string
+  public readonly host!: string
   public readonly headers: { [p: string]: any }
   public readonly realIP!: string
   public readonly reqid!: string
@@ -14,6 +15,7 @@ export class FangchaSession {
   public constructor(ctx: Context) {
     this.sessionId = makeUUID()
     this.headers = ctx.request.headers
+    this.host = ctx.host
     this.reqid = this.headers['x-request-id'] || makeUUID()
     {
       const headers = this.headers
@@ -51,9 +53,9 @@ export class FangchaSession {
   public correctUrl(url: string) {
     const matches = url.match(/^(https?:\/\/.*?)\//)
     if (matches) {
-      return url.replace(matches[1], _SessionApp.baseURL)
+      return url.replace(matches[1], _SessionApp.getBaseURL(this.host))
     }
-    return _SessionApp.baseURL
+    return _SessionApp.getBaseURL(this.host)
   }
 
   public auth() {}
