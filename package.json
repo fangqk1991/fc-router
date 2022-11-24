@@ -14,15 +14,17 @@
   ],
   "author": "fang <me@fangqk.com>",
   "license": "MIT",
-  "devDependencies": {
+  "dependencies": {
     "@fangcha/app-error": "^1.5.0",
+    "@fangcha/tools": "^1.22.0",
+    "@fangcha/swagger": "^0.1.1"
+  },
+  "devDependencies": {
     "@fangcha/app-request": "^1.6.0",
     "@fangcha/assert": "^1.1.0",
     "@fangcha/backend-kit": "^0.41.0",
     "@fangcha/eslint": "^0.3.2",
     "@fangcha/logger": "^0.4.0",
-    "@fangcha/swagger": "^0.1.1",
-    "@fangcha/tools": "^1.22.0",
     "@types/assert": "^1.5.6",
     "@types/jsonwebtoken": "^8.5.9",
     "@types/koa": "2.13.5",
