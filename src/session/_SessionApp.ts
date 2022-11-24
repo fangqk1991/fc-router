@@ -3,8 +3,25 @@ import { BasicAuthProtocol, JWTProtocol, PermissionProtocol } from '../basic'
 
 class __SessionApp implements PermissionProtocol {
   public baseURL: string = ''
+  public availableHostMap: { [host: string]: string } = {}
   public jwtProtocol!: JWTProtocol
   public basicAuthProtocol!: BasicAuthProtocol
+
+  public setBaseURL(val: string) {
+    const urls = val.split(',').map((item) => item.trim())
+    this.baseURL = urls[0]
+    this.availableHostMap = urls.reduce((result, url) => {
+      const matches = url.match(/https?:\/\/([^:\/\s]+)/)
+      if (matches) {
+        result[matches[1]] = url
+      }
+      return result
+    }, {})
+  }
+
+  public getBaseURL(host: string) {
+    return this.availableHostMap[host] || this.baseURL
+  }
 
   public checkUserIsAdmin = (_email: string) => {
     return false
