@@ -1,6 +1,6 @@
 {
   "name": "@fangcha/router",
-  "version": "0.24.0",
+  "version": "0.25.0",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "scripts": {
@@ -17,25 +17,24 @@
   "dependencies": {
     "@fangcha/app-error": "^1.5.0",
     "@fangcha/tools": "^1.22.0",
-    "@fangcha/swagger": "^0.1.1"
-  },
-  "devDependencies": {
-    "@fangcha/app-request": "^1.6.0",
-    "@fangcha/assert": "^1.1.0",
-    "@fangcha/backend-kit": "^0.41.0",
-    "@fangcha/eslint": "^0.3.2",
-    "@fangcha/logger": "^0.4.0",
-    "@types/assert": "^1.5.6",
-    "@types/jsonwebtoken": "^8.5.9",
-    "@types/koa": "2.13.5",
-    "@types/mocha": "^10.0.0",
-    "@types/node": "^18.11.9",
-    "jsonwebtoken": "^8.5.1",
+    "@fangcha/swagger": "^0.1.1",
     "koa": "^2.13.4",
     "koa-body": "^5.0.0",
     "koa-compose": "^4.1.0",
     "@koa/router": "^12.0.0",
+    "@types/koa": "2.13.5",
     "@types/koa__router": "^12.0.0",
+    "jsonwebtoken": "^8.5.1",
+    "@types/jsonwebtoken": "^8.5.9"
+  },
+  "devDependencies": {
+    "@fangcha/assert": "^1.1.0",
+    "@fangcha/backend-kit": "^0.50.0",
+    "@fangcha/eslint": "^0.3.2",
+    "@fangcha/logger": "^0.4.0",
+    "@types/assert": "^1.5.6",
+    "@types/mocha": "^10.0.0",
+    "@types/node": "^18.11.9",
     "log4js": "^6.7.0",
     "mocha": "^10.1.0",
     "nyc": "^15.1.0",
